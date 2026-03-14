@@ -307,6 +307,8 @@ const practiceState = {
   lastY: 0,
   paletteIndex: 0,
   paletteBlend: 0,
+  width: 0,
+  height: 0,
 };
 
 const tickerKeys = [
@@ -646,6 +648,7 @@ function handleScroll() {
   const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
   inkState.scrollRatio = ratio;
   root.style.setProperty("--page-progress", ratio.toFixed(4));
+  progressButton?.style.setProperty("--progress-ratio", ratio.toFixed(4));
   progressFill.style.transform = `scaleX(${ratio.toFixed(4)})`;
   updateThemeFromScroll();
   updateActiveNavFromScroll();
@@ -742,15 +745,42 @@ function resizePracticeBoard() {
     return;
   }
 
-  practiceState.dpr = Math.min(window.devicePixelRatio || 1, 2);
-  practiceCanvas.width = Math.floor(rect.width * practiceState.dpr);
-  practiceCanvas.height = Math.floor(rect.height * practiceState.dpr);
+  const nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+  const nextWidth = Math.floor(rect.width * nextDpr);
+  const nextHeight = Math.floor(rect.height * nextDpr);
+
+  if (
+    nextWidth === practiceCanvas.width &&
+    nextHeight === practiceCanvas.height &&
+    nextDpr === practiceState.dpr
+  ) {
+    return;
+  }
+
+  let snapshot = null;
+
+  if (practiceCanvas.width > 0 && practiceCanvas.height > 0) {
+    snapshot = document.createElement("canvas");
+    snapshot.width = practiceCanvas.width;
+    snapshot.height = practiceCanvas.height;
+    snapshot.getContext("2d")?.drawImage(practiceCanvas, 0, 0);
+  }
+
+  practiceState.dpr = nextDpr;
+  practiceCanvas.width = nextWidth;
+  practiceCanvas.height = nextHeight;
+  practiceState.width = rect.width;
+  practiceState.height = rect.height;
   practiceState.context.setTransform(practiceState.dpr, 0, 0, practiceState.dpr, 0, 0);
   practiceState.context.lineCap = "round";
   practiceState.context.lineJoin = "round";
   practiceState.context.lineWidth = 4.4;
   practiceState.context.strokeStyle = hexToRgba(practicePalette[0], 0.94);
   resetPracticeBoard();
+
+  if (snapshot) {
+    practiceState.context.drawImage(snapshot, 0, 0, snapshot.width, snapshot.height, 0, 0, rect.width, rect.height);
+  }
 }
 
 function getPracticePoint(event) {
@@ -771,18 +801,28 @@ function getPracticePaletteColor() {
   return mixHexColors(current, next, practiceState.paletteBlend);
 }
 
+function isTouchPracticeEvent(event) {
+  return event.pointerType === "touch";
+}
+
 function startPracticeStroke(event) {
   if (!practiceCanvas || !practiceState.context) {
     return;
   }
 
+  if (!isTouchPracticeEvent(event)) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
   const point = getPracticePoint(event);
   practiceState.drawing = true;
   practiceState.lastX = point.x;
   practiceState.lastY = point.y;
   practiceState.paletteIndex = (practiceState.paletteIndex + 1) % practicePalette.length;
   practiceState.paletteBlend = 0;
-  practiceCanvas.setPointerCapture?.(event.pointerId);
+  if (!isTouchPracticeEvent(event)) {
+    practiceCanvas.setPointerCapture?.(event.pointerId);
+  }
 }
 
 function movePracticeStroke(event) {
@@ -790,6 +830,10 @@ function movePracticeStroke(event) {
     return;
   }
 
+  if (!isTouchPracticeEvent(event)) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
   const point = getPracticePoint(event);
   const distance = Math.hypot(point.x - practiceState.lastX, point.y - practiceState.lastY);
   practiceState.paletteBlend += Math.max(0.015, distance * 0.0024);
@@ -814,8 +858,14 @@ function endPracticeStroke(event) {
     return;
   }
 
+  if (!isTouchPracticeEvent(event)) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
   practiceState.drawing = false;
-  practiceCanvas.releasePointerCapture?.(event.pointerId);
+  if (!isTouchPracticeEvent(event)) {
+    practiceCanvas.releasePointerCapture?.(event.pointerId);
+  }
 }
 
 function initPracticeBoard() {
@@ -829,6 +879,12 @@ function initPracticeBoard() {
   practiceCanvas.addEventListener("pointerup", endPracticeStroke);
   practiceCanvas.addEventListener("pointerleave", endPracticeStroke);
   practiceCanvas.addEventListener("pointercancel", endPracticeStroke);
+  practiceCanvas.addEventListener("click", (event) => {
+    if (!isTouchPracticeEvent(event)) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
   practiceClearButton?.addEventListener("click", () => {
     resetPracticeBoard();
   });
@@ -1109,14 +1165,6 @@ function attachGlobalEvents() {
       pointer.x = event.clientX;
       pointer.y = event.clientY;
       pointer.active = true;
-    },
-    { passive: true }
-  );
-
-  window.addEventListener(
-    "pointerdown",
-    (event) => {
-      spawnRipple(event.clientX, event.clientY, 1);
     },
     { passive: true }
   );

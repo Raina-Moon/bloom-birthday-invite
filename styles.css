@@ -256,6 +256,8 @@ a {
 }
 
 .frame__progress {
+  position: relative;
+  isolation: isolate;
   min-width: 196px;
   display: grid;
   gap: 0.5rem;
@@ -270,6 +272,12 @@ a {
     transform 220ms ease,
     box-shadow 220ms ease,
     background 220ms ease;
+}
+
+.frame__progress > span,
+.frame__progress .frame__bar {
+  position: relative;
+  z-index: 1;
 }
 
 .frame__progress:hover,
@@ -557,6 +565,9 @@ main {
   display: grid;
   gap: 0.75rem;
   align-self: start;
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
   padding: 1rem;
   border-radius: 1.6rem;
   border: 1px solid rgba(24, 22, 22, 0.08);
@@ -598,9 +609,13 @@ main {
 .practice-card__board {
   position: relative;
   min-height: 15rem;
+  z-index: 2;
   border-radius: 1.1rem;
   overflow: hidden;
   border: 1px solid rgba(24, 22, 22, 0.08);
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
   background:
     radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--accent-1) 12%, white), transparent 36%),
     radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--accent-2) 14%, white), transparent 34%),
@@ -608,11 +623,15 @@ main {
 }
 
 .practice-card__canvas {
+  position: relative;
+  z-index: 3;
   width: 100%;
   height: 100%;
   min-height: 15rem;
   display: block;
-  touch-action: none;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
   cursor: crosshair;
 }
 
@@ -1318,7 +1337,78 @@ main {
   }
 
   .frame__progress {
+    --progress-size: 4.5rem;
+    --progress-ring: 4px;
+    position: fixed;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: var(--progress-size);
+    min-width: 0;
+    height: var(--progress-size);
+    padding: 0.22rem;
+    gap: 0;
+    place-items: center;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ink);
+    z-index: 7;
+  }
+
+  .frame__progress::before,
+  .frame__progress::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .frame__progress::before {
+    background:
+      conic-gradient(
+        from -90deg,
+        color-mix(in srgb, var(--accent-4) 58%, var(--accent-1)) 0turn,
+        var(--accent-1) calc(var(--progress-ratio, 0) * 0.18turn),
+        color-mix(in srgb, var(--accent-1) 56%, var(--accent-2))
+          calc(var(--progress-ratio, 0) * 0.52turn),
+        color-mix(in srgb, var(--accent-2) 52%, var(--accent-4))
+          calc(var(--progress-ratio, 0) * 0.82turn),
+        color-mix(in srgb, var(--accent-4) 58%, var(--accent-1))
+          calc(var(--progress-ratio, 0) * 1turn),
+        rgba(24, 22, 22, 0.12) 0
+      );
+    box-shadow: 0 14px 26px rgba(24, 22, 22, 0.12);
+  }
+
+  .frame__progress::after {
+    inset: calc(var(--progress-ring) + 1px);
+    background:
+      radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.78), transparent 38%),
+      color-mix(in srgb, var(--surface-strong) 90%, white);
+    border: 1px solid rgba(24, 22, 22, 0.08);
+  }
+
+  .frame__progress > span {
+    max-width: 3rem;
+    font-size: 0.46rem;
+    line-height: 1.14;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-wrap: balance;
+  }
+
+  .frame__progress .frame__bar {
     display: none;
+  }
+
+  .frame__progress:hover,
+  .frame__progress:focus-visible {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .frame__progress.is-complete {
+    background: transparent;
   }
 
   .frame__nav {
@@ -1384,6 +1474,19 @@ main {
     min-height: 3.1rem;
     padding: 0;
     border-radius: 999px;
+  }
+
+  .frame__progress {
+    --progress-size: 4.1rem;
+    --progress-ring: 3.6px;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    padding: 0.18rem;
+  }
+
+  .frame__progress > span {
+    max-width: 2.78rem;
+    font-size: 0.42rem;
   }
 
   .calendar-button__label {
@@ -1537,6 +1640,20 @@ main {
     padding: 0;
     font-size: 0.71rem;
     box-shadow: 0 12px 28px rgba(24, 22, 22, 0.1);
+  }
+
+  .frame__progress {
+    --progress-size: 3.8rem;
+    --progress-ring: 3.2px;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    padding: 0.16rem;
+  }
+
+  .frame__progress > span {
+    max-width: 2.5rem;
+    font-size: 0.38rem;
+    line-height: 1.1;
   }
 
   .frame__nav {
