@@ -309,6 +309,7 @@ const practiceState = {
   paletteBlend: 0,
   width: 0,
   height: 0,
+  touchIdentifier: null,
 };
 
 const tickerKeys = [
@@ -795,6 +796,18 @@ function getPracticePoint(event) {
   };
 }
 
+function getPracticePointFromClient(clientX, clientY) {
+  const rect = practiceCanvas?.getBoundingClientRect();
+  if (!rect) {
+    return { x: 0, y: 0 };
+  }
+
+  return {
+    x: clientX - rect.left,
+    y: clientY - rect.top,
+  };
+}
+
 function getPracticePaletteColor() {
   const current = practicePalette[practiceState.paletteIndex % practicePalette.length];
   const next = practicePalette[(practiceState.paletteIndex + 1) % practicePalette.length];
@@ -805,36 +818,19 @@ function isTouchPracticeEvent(event) {
   return event.pointerType === "touch";
 }
 
-function startPracticeStroke(event) {
-  if (!practiceCanvas || !practiceState.context) {
-    return;
-  }
-
-  if (!isTouchPracticeEvent(event)) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-  const point = getPracticePoint(event);
+function beginPracticeStroke(point) {
   practiceState.drawing = true;
   practiceState.lastX = point.x;
   practiceState.lastY = point.y;
   practiceState.paletteIndex = (practiceState.paletteIndex + 1) % practicePalette.length;
   practiceState.paletteBlend = 0;
-  if (!isTouchPracticeEvent(event)) {
-    practiceCanvas.setPointerCapture?.(event.pointerId);
-  }
 }
 
-function movePracticeStroke(event) {
+function drawPracticeStroke(point) {
   if (!practiceState.drawing || !practiceState.context) {
     return;
   }
 
-  if (!isTouchPracticeEvent(event)) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-  const point = getPracticePoint(event);
   const distance = Math.hypot(point.x - practiceState.lastX, point.y - practiceState.lastY);
   practiceState.paletteBlend += Math.max(0.015, distance * 0.0024);
 
@@ -853,19 +849,95 @@ function movePracticeStroke(event) {
   practiceState.lastY = point.y;
 }
 
-function endPracticeStroke(event) {
-  if (!practiceCanvas) {
+function startPracticeStroke(event) {
+  if (!practiceCanvas || !practiceState.context || isTouchPracticeEvent(event)) {
     return;
   }
 
+  event.stopPropagation();
+  event.preventDefault();
+  const point = getPracticePoint(event);
+  beginPracticeStroke(point);
   if (!isTouchPracticeEvent(event)) {
-    event.stopPropagation();
-    event.preventDefault();
+    practiceCanvas.setPointerCapture?.(event.pointerId);
   }
+}
+
+function movePracticeStroke(event) {
+  if (!practiceState.drawing || !practiceState.context || isTouchPracticeEvent(event)) {
+    return;
+  }
+
+  event.stopPropagation();
+  event.preventDefault();
+  const point = getPracticePoint(event);
+  drawPracticeStroke(point);
+}
+
+function endPracticeStroke(event) {
+  if (!practiceCanvas || isTouchPracticeEvent(event)) {
+    return;
+  }
+
+  event.stopPropagation();
+  event.preventDefault();
   practiceState.drawing = false;
-  if (!isTouchPracticeEvent(event)) {
-    practiceCanvas.releasePointerCapture?.(event.pointerId);
+  practiceCanvas.releasePointerCapture?.(event.pointerId);
+}
+
+function startPracticeTouch(event) {
+  if (!practiceCanvas || !practiceState.context || practiceState.touchIdentifier !== null) {
+    return;
   }
+
+  const touch = event.changedTouches[0];
+  if (!touch) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  const point = getPracticePointFromClient(touch.clientX, touch.clientY);
+  practiceState.touchIdentifier = touch.identifier;
+  beginPracticeStroke(point);
+}
+
+function movePracticeTouch(event) {
+  if (!practiceCanvas || !practiceState.context || practiceState.touchIdentifier === null) {
+    return;
+  }
+
+  const touch = [...event.changedTouches].find(
+    (candidate) => candidate.identifier === practiceState.touchIdentifier
+  );
+
+  if (!touch) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  const point = getPracticePointFromClient(touch.clientX, touch.clientY);
+  drawPracticeStroke(point);
+}
+
+function endPracticeTouch(event) {
+  if (practiceState.touchIdentifier === null) {
+    return;
+  }
+
+  const touch = [...event.changedTouches].find(
+    (candidate) => candidate.identifier === practiceState.touchIdentifier
+  );
+
+  if (!touch) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  practiceState.drawing = false;
+  practiceState.touchIdentifier = null;
 }
 
 function initPracticeBoard() {
@@ -879,6 +951,10 @@ function initPracticeBoard() {
   practiceCanvas.addEventListener("pointerup", endPracticeStroke);
   practiceCanvas.addEventListener("pointerleave", endPracticeStroke);
   practiceCanvas.addEventListener("pointercancel", endPracticeStroke);
+  practiceCanvas.addEventListener("touchstart", startPracticeTouch, { passive: false });
+  practiceCanvas.addEventListener("touchmove", movePracticeTouch, { passive: false });
+  practiceCanvas.addEventListener("touchend", endPracticeTouch, { passive: false });
+  practiceCanvas.addEventListener("touchcancel", endPracticeTouch, { passive: false });
   practiceCanvas.addEventListener("click", (event) => {
     if (!isTouchPracticeEvent(event)) {
       event.preventDefault();
