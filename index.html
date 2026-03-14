@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">Tshela's Birthday - Shisha & Paint Night</title>
+    <meta
+      id="pageDescription"
+      name="description"
+      content="Stylischer Event-Flyer fuer Tshela's Birthday, BREAK Paint Concept und die feinSTAUB Lounge in Stuttgart."
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="./assets/break-logo-transparent.png" as="image" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas class="ink-canvas" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="frame">
+      <nav class="frame__nav" aria-label="Section navigation">
+        <button class="frame__nav-button is-active" data-target="hero">
+          <span>01</span>
+          <span data-i18n="nav.hero">Auftakt</span>
+        </button>
+        <button class="frame__nav-button" data-target="schedule">
+          <span>02</span>
+          <span data-i18n="nav.schedule">Ablauf</span>
+        </button>
+        <button class="frame__nav-button" data-target="location">
+          <span>03</span>
+          <span data-i18n="nav.location">Lounge</span>
+        </button>
+        <button class="frame__nav-button" data-target="details">
+          <span>04</span>
+          <span data-i18n="nav.details">Flyer</span>
+        </button>
+      </nav>
+
+      <div class="frame__actions">
+        <div class="frame__locale" role="group" aria-label="Language switcher">
+          <button class="frame__locale-button" type="button" data-language="en">
+            EN
+          </button>
+          <button class="frame__locale-button is-active" type="button" data-language="de">
+            DE
+          </button>
+        </div>
+
+        <button
+          class="calendar-button frame__calendar"
+          type="button"
+          id="calendarButton"
+          data-i18n-aria-label="hero.calendarButton"
+        >
+          <span class="calendar-button__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path
+                d="M7 2.75a.75.75 0 0 1 .75.75v1h8.5v-1a.75.75 0 0 1 1.5 0v1h.75A2.5 2.5 0 0 1 21 7v11.25a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.25V7a2.5 2.5 0 0 1 2.5-2.5h.75v-1A.75.75 0 0 1 7 2.75ZM4.5 9.5v8.75c0 .552.448 1 1 1h13c.552 0 1-.448 1-1V9.5h-15Zm1-3.5a1 1 0 0 0-1 1V8h15V7a1 1 0 0 0-1-1h-.75v.75a.75.75 0 0 1-1.5 0V6h-8.5v.75a.75.75 0 0 1-1.5 0V6H5.5Zm2.75 6.75a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5H9v1.5a.75.75 0 0 1-1.5 0V16.5H6a.75.75 0 0 1 0-1.5h1.5V13.5a.75.75 0 0 1 .75-.75Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <span class="calendar-button__label" data-i18n="hero.calendarButton">In Kalender speichern</span>
+        </button>
+
+        <button class="frame__progress" id="progressButton" type="button">
+          <span data-i18n="progress.label" id="progressLabel">durch die Nacht scrollen</span>
+          <div class="frame__bar">
+            <div class="frame__bar-fill"></div>
+          </div>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="panel panel--hero"
+        id="hero"
+        data-accent-one="#ff5f6d"
+        data-accent-two="#ffcf56"
+        data-accent-three="#3a86ff"
+      >
+        <div class="panel__sticky">
+          <div class="hero hero--poster">
+            <div class="hero__copy">
+              <p class="eyebrow" data-i18n="hero.eyebrow">11.04 • Stuttgart • Shisha & Paint</p>
+              <p class="hero__meta-line" data-i18n="hero.metaLine">
+                Tshela x BREAK x feinSTAUB Lounge
+              </p>
+              <h1 class="hero__title">
+                <span class="hero__title-line" data-i18n="hero.titleTop">Tshela's Birthday</span>
+                <span class="hero__title-row">
+                  <span class="hero__title-prefix" data-i18n="hero.titlePrefix">Shisha & Paint</span>
+                  <span class="hero__title-night-cluster">
+                    <span class="hero__title-night" data-i18n="hero.titleNight">Night</span>
+                    <span class="hero__brand-lockup drift" data-parallax="0.18">
+                      <span class="hero__brand-copy" data-i18n="hero.brandLead">with</span>
+                      <img
+                        class="hero__brand-mark"
+                        id="breakLogo"
+                        src="./assets/break-logo-transparent.png"
+                        alt="BREAK logo"
+                        loading="eager"
+                        fetchpriority="high"
+                      />
+                    </span>
+                  </span>
+                </span>
+              </h1>
+              <p class="hero__lede" data-i18n="hero.lede">
+                Eine Geburtstagsnacht, die gleichzeitig Kunstabend, Afro-Music-Night
+                und Lounge-Treffen ist. BREAK bringt das Painting-Konzept, feinSTAUB
+                die Bar-Atmosphaere, und nach Mitternacht geht die Party weiter.
+              </p>
+
+              <div class="hero__tags">
+                <span data-i18n="hero.tagOne">Birthday Celebration</span>
+                <span data-i18n="hero.tagTwo">BREAK Paint Concept</span>
+                <span data-i18n="hero.tagThree">feinSTAUB Lounge</span>
+                <span data-i18n="hero.tagFour">Afrobeats / Afrohouse</span>
+              </div>
+            </div>
+
+            <div class="hero__stack">
+              <aside class="hero__card drift" data-parallax="0.45">
+                <p class="hero__card-label" data-i18n="hero.cardLabel">Event Snapshot</p>
+                <dl>
+                  <div>
+                    <dt data-i18n="hero.cardDateLabel">DATUM</dt>
+                    <dd data-i18n="hero.cardDateValue">11.04</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="hero.cardTimeLabel">PAINT SESSION</dt>
+                    <dd data-i18n="hero.cardTimeValue">21:00 - 00:00</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="hero.cardPlaceLabel">LOCATION</dt>
+                    <dd data-i18n="hero.cardPlaceValue">feinSTAUB Lounge, Stuttgart</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="hero.cardMusicLabel">MUSIK</dt>
+                    <dd data-i18n="hero.cardMusicValue">Afrobeats / Afrohouse</dd>
+                  </div>
+                </dl>
+              </aside>
+
+              <aside class="practice-card drift" data-parallax="0.28">
+                <p class="practice-card__eyebrow" data-i18n="hero.practiceEyebrow">Warm-up</p>
+                <h3 class="practice-card__title" data-i18n="hero.practiceTitle">
+                  Vor der Party schon mal zeichnen.
+                </h3>
+                <p class="practice-card__body" data-i18n="hero.practiceBody">
+                  Kleine Kritzelei vorab. Einfach direkt hier malen, bevor die echte Paint Session startet.
+                </p>
+                <div class="practice-card__board">
+                  <canvas class="practice-card__canvas" id="practiceCanvas" aria-label="Practice drawing board"></canvas>
+                </div>
+                <button class="practice-card__clear" id="practiceClear" type="button" data-i18n="hero.practiceClear">
+                  Flaeche leeren
+                </button>
+              </aside>
+            </div>
+          </div>
+
+          <div class="ticker" aria-hidden="true">
+            <div class="ticker__track">
+              <span data-i18n="ticker.one">BREAK</span>
+              <span data-i18n="ticker.two">PAINT</span>
+              <span data-i18n="ticker.three">SHISHA</span>
+              <span data-i18n="ticker.four">AFROBEATS</span>
+              <span data-i18n="ticker.five">LOUNGE</span>
+              <span data-i18n="ticker.six">BIRTHDAY</span>
+              <span data-i18n="ticker.one">BREAK</span>
+              <span data-i18n="ticker.two">PAINT</span>
+              <span data-i18n="ticker.three">SHISHA</span>
+              <span data-i18n="ticker.four">AFROBEATS</span>
+              <span data-i18n="ticker.five">LOUNGE</span>
+              <span data-i18n="ticker.six">BIRTHDAY</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="schedule"
+        data-accent-one="#ff4d8d"
+        data-accent-two="#5dd39e"
+        data-accent-three="#ffd166"
+      >
+        <div class="panel__sticky">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="schedule.eyebrow">Ablauf der Nacht</p>
+            <h2 data-i18n="schedule.heading">
+              Kunst zuerst, Drinks und Shisha danach, Musik die alles zusammenhaelt.
+            </h2>
+          </div>
+
+          <div class="ritual-grid ritual-grid--quad">
+            <article class="ritual-card drift" data-parallax="0.65">
+              <p>01</p>
+              <h3 data-i18n="schedule.cardOneTitle">Paint Session</h3>
+              <strong class="ritual-card__accent" data-i18n="schedule.cardOneTime">
+                21:00 - 00:00
+              </strong>
+              <p data-i18n="schedule.cardOneBody">
+                Es wird mit Acrylfarben und verschiedenen Materialien wie Pinseln,
+                Tupfern, Schwämmen und Kreppband gemalt.
+              </p>
+            </article>
+
+            <article class="ritual-card drift" data-parallax="-0.35">
+              <p>02</p>
+              <h3 data-i18n="schedule.cardTwoTitle">Materialien</h3>
+              <ul class="detail-list">
+                <li data-i18n="schedule.materialOne">Pinsel</li>
+                <li data-i18n="schedule.materialTwo">Schwämme</li>
+                <li data-i18n="schedule.materialThree">Tupfer</li>
+                <li data-i18n="schedule.materialFour">Kreppband</li>
+                <li data-i18n="schedule.materialFive">Schuerzen</li>
+              </ul>
+            </article>
+
+            <article class="ritual-card drift" data-parallax="0.4">
+              <p>03</p>
+              <h3 data-i18n="schedule.cardThreeTitle">Materialbeitrag</h3>
+              <strong class="ritual-card__accent" data-i18n="schedule.cardThreePrice">
+                9€ pro Person
+              </strong>
+              <p data-i18n="schedule.cardThreeBody">
+                Inklusive bedrucktem Jutebeutel zum Bemalen, den jede Person mit nach
+                Hause nehmen kann.
+              </p>
+            </article>
+
+            <article class="ritual-card drift" data-parallax="-0.25">
+              <p>04</p>
+              <h3 data-i18n="schedule.cardFourTitle">Nach 00:00</h3>
+              <p data-i18n="schedule.cardFourBody">
+                Die Malecke endet, aber die Party geht in der Bar weiter - mit Musik,
+                Drinks und Shisha bis spaeter in die Nacht.
+              </p>
+              <p class="ritual-card__footnote" data-i18n="schedule.cardFourNote">
+                Getraenke und Shisha werden direkt an der Bar bestellt und von jedem
+                Gast selbst bezahlt.
+              </p>
+            </article>
+          </div>
+
+          <div class="quote-strip drift" data-parallax="0.2">
+            <span data-i18n="schedule.quote">
+              Art Event x Afro Music Night x Birthday Celebration
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="location"
+        data-accent-one="#4cc9f0"
+        data-accent-two="#f72585"
+        data-accent-three="#b8f248"
+      >
+        <div class="panel__sticky">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="location.eyebrow">feinSTAUB Lounge</p>
+            <h2 data-i18n="location.heading">
+              Die Lounge ist nicht nur Treffpunkt, sondern Teil der Inszenierung.
+            </h2>
+          </div>
+
+          <div class="location-layout">
+            <div class="location-copy">
+              <div class="location-block">
+                <p class="location-block__label" data-i18n="location.blockLabel">Location</p>
+                <h3 data-i18n="location.name">feinSTAUB Lounge</h3>
+                <p data-i18n="location.addressLineOne">Rotenwaldstrasse 114</p>
+                <p data-i18n="location.addressLineTwo">70197 Stuttgart</p>
+              </div>
+
+              <div class="location-block">
+                <p class="location-block__label" data-i18n="location.musicLabel">Musik</p>
+                <h3 data-i18n="location.musicValue">Afrobeats / Afrohouse</h3>
+                <p data-i18n="location.selfPay">
+                  Getraenke und Shisha werden direkt vor Ort bestellt und von jedem
+                  Gast selbst bezahlt.
+                </p>
+              </div>
+
+              <div class="location-block location-block--note">
+                <p class="location-block__label" data-i18n="location.noteLabel">Hinweis</p>
+                <p data-i18n="location.noteBody">
+                  Tippe auf die Karte oder nutze die Buttons, um den Ort direkt in
+                  Google Maps zu oeffnen oder die Route zu starten.
+                </p>
+              </div>
+            </div>
+
+            <div class="map-stack drift" data-parallax="0.28">
+              <article class="map-shell">
+                <div class="map-shell__frame">
+                  <iframe
+                    id="mapFrame"
+                    class="map-frame"
+                    title="feinSTAUB Lounge on Google Maps"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+
+                <div class="map-shell__actions">
+                  <a
+                    class="map-button"
+                    id="mapOpenLink"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-i18n="location.mapOpen"
+                  >
+                    In Google Maps oeffnen
+                  </a>
+                  <a
+                    class="map-button map-button--ghost"
+                    id="mapRouteLink"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-i18n="location.mapRoute"
+                  >
+                    Route starten
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="photo-wall drift" data-parallax="0.14">
+            <figure class="photo-card photo-card--wide" style="--float-offset: -12px; --float-rotate: -1.6deg; --float-duration: 8.4s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-04-sign.jpeg"
+                data-photo-caption="feinSTAUB Lounge"
+              >
+                <img src="./assets/lounge-04-sign.jpeg" alt="Eingangsschild der feinSTAUB Lounge" loading="lazy" />
+                <span class="photo-card__meta">feinSTAUB Lounge</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: 14px; --float-rotate: 1.2deg; --float-duration: 7.2s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-06-shisha.jpeg"
+                data-photo-caption="Shisha Smoke"
+              >
+                <img src="./assets/lounge-06-shisha.jpeg" alt="Shisha im Lounge-Bereich" loading="lazy" />
+                <span class="photo-card__meta">Shisha Smoke</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: -10px; --float-rotate: 1deg; --float-duration: 9.1s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-02-drink.jpeg"
+                data-photo-caption="Signature Drink"
+              >
+                <img src="./assets/lounge-02-drink.jpeg" alt="Signature-Drink in der Lounge" loading="lazy" />
+                <span class="photo-card__meta">Signature Drink</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: 16px; --float-rotate: -1deg; --float-duration: 7.8s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-03-milkshake.jpeg"
+                data-photo-caption="Dessert Mood"
+              >
+                <img src="./assets/lounge-03-milkshake.jpeg" alt="Dessert-Drinks in der Lounge" loading="lazy" />
+                <span class="photo-card__meta">Dessert Mood</span>
+              </button>
+            </figure>
+            <figure class="photo-card photo-card--tall" style="--float-offset: -18px; --float-rotate: 1.6deg; --float-duration: 9.6s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-07-setup.jpeg"
+                data-photo-caption="BREAK Setup"
+              >
+                <img src="./assets/lounge-07-setup.jpeg" alt="BREAK Painting-Setup im Eventbereich" loading="lazy" />
+                <span class="photo-card__meta">BREAK Setup</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: 10px; --float-rotate: -1.4deg; --float-duration: 8.7s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-08-totebag.jpeg"
+                data-photo-caption="BREAK Tote Bag"
+              >
+                <img src="./assets/lounge-08-totebag.jpeg" alt="BREAK Jutebeutel als Paint-Beispiel" loading="lazy" />
+                <span class="photo-card__meta">BREAK Tote Bag</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: -14px; --float-rotate: 1.8deg; --float-duration: 7.6s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-09-canvas.jpeg"
+                data-photo-caption="Canvas Mood"
+              >
+                <img src="./assets/lounge-09-canvas.jpeg" alt="Beispiel fuer ein bemaltes Canvas" loading="lazy" />
+                <span class="photo-card__meta">Canvas Mood</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: 12px; --float-rotate: -1deg; --float-duration: 8.1s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-10-painting.jpeg"
+                data-photo-caption="Live Painting"
+              >
+                <img src="./assets/lounge-10-painting.jpeg" alt="Gast beim Malen auf Leinwand" loading="lazy" />
+                <span class="photo-card__meta">Live Painting</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: -9px; --float-rotate: 1.3deg; --float-duration: 9.3s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-05-dessert.jpeg"
+                data-photo-caption="Sweet Table"
+              >
+                <img src="./assets/lounge-05-dessert.jpeg" alt="Dessertteller aus der Lounge" loading="lazy" />
+                <span class="photo-card__meta">Sweet Table</span>
+              </button>
+            </figure>
+            <figure class="photo-card" style="--float-offset: 11px; --float-rotate: -1.5deg; --float-duration: 8.8s;">
+              <button
+                class="photo-card__button"
+                type="button"
+                data-photo-src="./assets/lounge-01-fruit.jpeg"
+                data-photo-caption="Fruit Plate"
+              >
+                <img src="./assets/lounge-01-fruit.jpeg" alt="Fruchtplatte fuer den Abend" loading="lazy" />
+                <span class="photo-card__meta">Fruit Plate</span>
+              </button>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="panel panel--final"
+        id="details"
+        data-accent-one="#fb5607"
+        data-accent-two="#8338ec"
+        data-accent-three="#3a86ff"
+      >
+        <div class="panel__sticky">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="details.eyebrow">Flyertext</p>
+            <h2 data-i18n="details.heading">
+              Der finale Content ist jetzt in einer druckbaren Posterkarte gebuendelt.
+            </h2>
+          </div>
+
+          <div class="poster-card drift" data-parallax="0.22">
+            <div class="poster-card__header">
+              <p class="poster-card__label" data-i18n="details.posterLabel">TITLE</p>
+              <h3 data-i18n="details.titleTop">Tshela's Birthday</h3>
+              <h4 data-i18n="details.titleBottom">Shisha & Paint Night</h4>
+            </div>
+
+            <div class="poster-card__meta">
+              <p data-i18n="details.metaDate">11.04</p>
+              <p data-i18n="details.metaTime">Paint Session: 21:00 - 00:00</p>
+              <p data-i18n="details.metaMusic">Afrobeats / Afrohouse</p>
+            </div>
+
+            <div class="poster-card__grid">
+              <article class="poster-block">
+                <p class="poster-block__label" data-i18n="details.paintLabel">Malecke</p>
+                <p data-i18n="details.paintBody">
+                  Es wird mit Acrylfarben und verschiedenen Materialien wie Pinseln,
+                  Tupfern, Schwaemmen und Kreppband gemalt.
+                </p>
+                <p data-i18n="details.priceBody">Materialbeitrag: 9€ pro Person</p>
+                <p data-i18n="details.priceSub">
+                  (Inklusive bedrucktem Jutebeutel zum Bemalen)
+                </p>
+                <p data-i18n="details.apronBody">
+                  Schuerzen werden gestellt, um Kleidung vor Farbspritzern zu schuetzen.
+                </p>
+              </article>
+
+              <article class="poster-block">
+                <p class="poster-block__label" data-i18n="details.locationLabel">Location</p>
+                <p data-i18n="details.locationName">feinSTAUB Lounge</p>
+                <p data-i18n="details.locationStreet">Rotenwaldstrasse 114</p>
+                <p data-i18n="details.locationCity">70197 Stuttgart</p>
+              </article>
+
+              <article class="poster-block">
+                <p class="poster-block__label" data-i18n="details.noteLabel">Hinweis</p>
+                <p data-i18n="details.noteBody">
+                  Getraenke und Shisha werden direkt vor Ort bestellt und von jedem
+                  Gast selbst bezahlt.
+                </p>
+                <p data-i18n="details.afterBody">
+                  Nach 00:00 geht die Party in der Bar weiter.
+                </p>
+              </article>
+
+              <article class="poster-block poster-block--brand">
+                <p class="poster-block__label" data-i18n="details.brandLabel">Featuring</p>
+                <p data-i18n="details.brandOne">Tshela's Birthday</p>
+                <p data-i18n="details.brandTwo">BREAK Paint Concept</p>
+                <p data-i18n="details.brandThree">feinSTAUB Lounge</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="lightbox" id="lightbox">
+      <div class="lightbox__chrome">
+        <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Close image">
+          ×
+        </button>
+      </div>
+      <div class="lightbox__stage">
+        <img class="lightbox__image" id="lightboxImage" alt="" />
+        <p class="lightbox__caption" id="lightboxCaption"></p>
+      </div>
+    </dialog>
+
+    <dialog class="calendar-sheet" id="calendarSheet">
+      <div class="calendar-sheet__panel">
+        <div class="calendar-sheet__header">
+          <p class="calendar-sheet__eyebrow" data-i18n="calendar.eyebrow">Kalender</p>
+          <h3 data-i18n="calendar.title">Zu welchem Kalender moechtest du hinzufuegen?</h3>
+          <button class="calendar-sheet__close" id="calendarSheetClose" type="button" aria-label="Close calendar options">
+            ×
+          </button>
+        </div>
+
+        <div class="calendar-sheet__actions">
+          <a class="calendar-option" id="calendarApple" href="./tshela-shisha-paint-night.ics" data-i18n="calendar.apple">
+            Apple Calendar
+          </a>
+          <a class="calendar-option" id="calendarGoogle" target="_blank" rel="noreferrer" data-i18n="calendar.google">
+            Google Calendar
+          </a>
+          <a class="calendar-option" id="calendarOutlook" target="_blank" rel="noreferrer" data-i18n="calendar.outlook">
+            Outlook
+          </a>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./config.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

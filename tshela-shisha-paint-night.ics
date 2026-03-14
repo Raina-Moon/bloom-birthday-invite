@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloom Birthday Invite//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:tshela-shisha-paint-20260411@bloom-birthday-invite
+DTSTAMP:20260314T000000Z
+DTSTART:20260411T190000Z
+DTEND:20260411T220000Z
+SUMMARY:Tshela's Birthday - Shisha & Paint Night
+LOCATION:feinSTAUB Lounge\, Rotenwaldstraße 114\, 70197 Stuttgart
+DESCRIPTION:Paint Session: 21:00-00:00. Afrobeats / Afrohouse. Materialbeitrag: 9 EUR pro Person. Inklusive bedrucktem Jutebeutel. Nach 00:00 geht die Party in der Bar weiter.
+END:VEVENT
+END:VCALENDAR

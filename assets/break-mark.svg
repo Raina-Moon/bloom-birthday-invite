@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="BREAK placeholder mark">
+  <defs>
+    <linearGradient id="warm" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f6c177" />
+      <stop offset="50%" stop-color="#ef7a2d" />
+      <stop offset="100%" stop-color="#8f4523" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="320" rx="36" fill="#1a120d" />
+  <g fill="none" stroke="url(#warm)" stroke-width="16">
+    <path d="M54 72c42 6 63 37 63 72s-21 68-63 74" />
+    <path d="M168 72v176" />
+    <path d="M168 74h78c39 0 60 18 60 48 0 23-13 38-38 45 30 5 47 23 47 50 0 36-27 59-72 59h-75" />
+    <path d="M360 72v176" />
+    <path d="M360 74h119" />
+    <path d="M360 160h98" />
+    <path d="M360 248h122" />
+    <path d="M525 72v176" />
+    <path d="M525 74h42c47 0 73 25 73 64 0 44-33 67-82 67h-33" />
+  </g>
+  <text
+    x="52"
+    y="296"
+    fill="#f8e2bf"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="30"
+    letter-spacing="8"
+  >
+    PAINT CONCEPT PLACEHOLDER
+  </text>
+</svg>
