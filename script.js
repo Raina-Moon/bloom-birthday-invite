@@ -76,7 +76,7 @@ const translations = {
     "hero.cardPlaceLabel": "LOCATION",
     "hero.cardPlaceValue": "feinSTAUB Lounge, Stuttgart",
     "hero.cardMusicLabel": "MUSIK",
-    "hero.cardMusicValue": "Afrobeats / Afrohouse",
+    "hero.cardMusicValue": "90s Vibe / Afrobeats / Afrohouse",
     "hero.practiceEyebrow": "Warm-up",
     "hero.practiceTitle": "Vor der Party schon mal zeichnen.",
     "hero.practiceBody":
@@ -88,6 +88,7 @@ const translations = {
     "ticker.four": "AFROBEATS",
     "ticker.five": "LOUNGE",
     "ticker.six": "BIRTHDAY",
+    "ticker.seven": "90s VIBE",
     "schedule.eyebrow": "Ablauf der Nacht",
     "schedule.heading":
       "Kunst zuerst, Drinks und Shisha danach, Musik die alles zusammenhaelt.",
@@ -119,7 +120,7 @@ const translations = {
     "location.addressLineOne": "Rotenwaldstraße 114",
     "location.addressLineTwo": "70197 Stuttgart",
     "location.musicLabel": "Musik",
-    "location.musicValue": "Afrobeats / Afrohouse",
+    "location.musicValue": "90s Vibe / Afrobeats / Afrohouse",
     "location.selfPay":
       "Getränke und Shisha werden direkt vor Ort bestellt und von jedem Gast selbst bezahlt.",
     "location.noteLabel": "Hinweis",
@@ -135,7 +136,7 @@ const translations = {
     "details.titleBottom": "Shisha & Paint Night",
     "details.metaDate": "📅 11.04",
     "details.metaTime": "🕘 Paint Session: 21:00 - 00:00",
-    "details.metaMusic": "🎶 Afrobeats / Afrohouse",
+    "details.metaMusic": "🎶 90s Vibe / Afrobeats / Afrohouse",
     "details.paintLabel": "🎨 Malecke",
     "details.paintBody":
       "Es wird mit Acrylfarben und verschiedenen Materialien wie Pinseln, Tupfern, Schwämmen und Kreppband gemalt.",
@@ -156,7 +157,7 @@ const translations = {
     "details.brandTwo": "BREAK Paint Concept",
     "details.brandThree": "feinSTAUB Lounge",
     "signup.eyebrow": "Painting Guest List",
-    "signup.heading": "Wer beim 90s Paint Table dabei sein will, traegt sich hier ein.",
+    "signup.heading": "Wer bei der Paint Session mitmachen will, traegt sich hier ein.",
     "signup.body":
       "So koennen Material, Tote Bags und Plaetze vorab geplant werden. Gesammelt werden Name, Telefonnummer und WhatsApp ID.",
     "signup.nameLabel": "Name",
@@ -209,7 +210,7 @@ const translations = {
     "hero.cardPlaceLabel": "LOCATION",
     "hero.cardPlaceValue": "feinSTAUB Lounge, Stuttgart",
     "hero.cardMusicLabel": "MUSIC",
-    "hero.cardMusicValue": "Afrobeats / Afrohouse",
+    "hero.cardMusicValue": "90s Vibe / Afrobeats / Afrohouse",
     "hero.practiceEyebrow": "Warm-up",
     "hero.practiceTitle": "Sketch before the party starts.",
     "hero.practiceBody":
@@ -221,6 +222,7 @@ const translations = {
     "ticker.four": "AFROBEATS",
     "ticker.five": "LOUNGE",
     "ticker.six": "BIRTHDAY",
+    "ticker.seven": "90s VIBE",
     "schedule.eyebrow": "Night flow",
     "schedule.heading": "Art first, then drinks and shisha, with music tying the night together.",
     "schedule.cardOneTitle": "Paint Session",
@@ -250,7 +252,7 @@ const translations = {
     "location.addressLineOne": "Rotenwaldstrasse 114",
     "location.addressLineTwo": "70197 Stuttgart",
     "location.musicLabel": "Music",
-    "location.musicValue": "Afrobeats / Afrohouse",
+    "location.musicValue": "90s Vibe / Afrobeats / Afrohouse",
     "location.selfPay":
       "Drinks and shisha are ordered on site and paid by each guest individually.",
     "location.noteLabel": "Note",
@@ -265,7 +267,7 @@ const translations = {
     "details.titleBottom": "Shisha & Paint Night",
     "details.metaDate": "📅 11.04",
     "details.metaTime": "🕘 Paint Session: 9:00 PM - 12:00 AM",
-    "details.metaMusic": "🎶 Afrobeats / Afrohouse",
+    "details.metaMusic": "🎶 90s Vibe / Afrobeats / Afrohouse",
     "details.paintLabel": "🎨 Painting Corner",
     "details.paintBody":
       "Guests paint with acrylic colors and materials like brushes, dabbers, sponges, and masking tape.",
@@ -285,7 +287,7 @@ const translations = {
     "details.brandTwo": "BREAK Paint Concept",
     "details.brandThree": "feinSTAUB Lounge",
     "signup.eyebrow": "Painting Guest List",
-    "signup.heading": "Join the 90s paint table here if you want a spot.",
+    "signup.heading": "Sign up here if you want to join the paint session.",
     "signup.body":
       "This helps plan materials, tote bags, and seats ahead of time. We collect name, phone number, and WhatsApp ID.",
     "signup.nameLabel": "Name",
@@ -359,6 +361,7 @@ const tickerKeys = [
   "ticker.four",
   "ticker.five",
   "ticker.six",
+  "ticker.seven",
 ];
 
 const venueQuery = "feinSTAUB Lounge, Rotenwaldstraße 114, 70197 Stuttgart";
@@ -368,7 +371,7 @@ const calendarEvent = {
   title: "Tshela's Birthday - Shisha & Paint Night",
   location: "feinSTAUB Lounge, Rotenwaldstraße 114, 70197 Stuttgart",
   description:
-    "Paint Session: 21:00-00:00. Afrobeats / Afrohouse. Materialbeitrag: 9 EUR pro Person. Inklusive bedrucktem Jutebeutel. Nach 00:00 geht die Party in der Bar weiter.",
+    "Paint Session: 21:00-00:00. 90s Vibe, Afrobeats / Afrohouse. Materialbeitrag: 9 EUR pro Person. Inklusive bedrucktem Jutebeutel. Nach 00:00 geht die Party in der Bar weiter.",
   startLocal: "2026-04-11T21:00:00",
   endLocal: "2026-04-12T00:00:00",
   startUtc: "20260411T190000Z",
