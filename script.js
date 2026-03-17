@@ -29,6 +29,9 @@ const lightboxCaption = document.getElementById("lightboxCaption");
 const mapFrame = document.getElementById("mapFrame");
 const mapOpenLink = document.getElementById("mapOpenLink");
 const mapRouteLink = document.getElementById("mapRouteLink");
+const paintingSignupForm = document.getElementById("paintingSignupForm");
+const paintingSignupSubmit = document.getElementById("paintingSignupSubmit");
+const paintingSignupStatus = document.getElementById("paintingSignupStatus");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const appConfig = window.EVENT_CONFIG || {};
@@ -54,11 +57,11 @@ const translations = {
     "hero.titleBottom": "Shisha & Paint Night",
     "hero.brandLead": "mit",
     "hero.lede":
-      "Eine Geburtstagsnacht, die gleichzeitig Kunstabend, Afro-Music-Night und Lounge-Treffen ist. BREAK bringt das Painting-Konzept, feinSTAUB die Bar-Atmosphaere, und nach Mitternacht geht die Party weiter.",
+      "Eine Geburtstagsnacht, die gleichzeitig Kunstabend, Afro-Music-Night und Lounge-Treffen ist. BREAK bringt das Painting-Konzept, feinSTAUB die Bar-Atmosphaere, dazu kommt ein warmer 90s-Vibe mit throwback energy, und nach Mitternacht geht die Party weiter.",
     "hero.tagOne": "Birthday Celebration",
     "hero.tagTwo": "BREAK Paint Concept",
     "hero.tagThree": "feinSTAUB Lounge",
-    "hero.tagFour": "Afrobeats / Afrohouse",
+    "hero.tagFour": "90s Vibe / Afrobeats / Afrohouse",
     "hero.calendarButton": "In Kalender speichern",
     "calendar.eyebrow": "Kalender",
     "calendar.title": "Zu welchem Kalender moechtest du hinzufuegen?",
@@ -107,7 +110,7 @@ const translations = {
       "Die Malecke endet, aber die Party geht in der Bar weiter - mit Musik, Drinks und Shisha bis spaeter in die Nacht.",
     "schedule.cardFourNote":
       "Getränke und Shisha werden direkt an der Bar bestellt und von jedem Gast selbst bezahlt.",
-    "schedule.quote": "Art Event x Afro Music Night x Birthday Celebration",
+    "schedule.quote": "Art Event x 90s Vibe x Afro Music Night x Birthday Celebration",
     "location.eyebrow": "feinSTAUB Lounge",
     "location.heading":
       "Die Lounge ist nicht nur Treffpunkt, sondern Teil der Inszenierung.",
@@ -152,6 +155,22 @@ const translations = {
     "details.brandOne": "Tshela's Birthday",
     "details.brandTwo": "BREAK Paint Concept",
     "details.brandThree": "feinSTAUB Lounge",
+    "signup.eyebrow": "Painting Guest List",
+    "signup.heading": "Wer beim 90s Paint Table dabei sein will, traegt sich hier ein.",
+    "signup.body":
+      "So koennen Material, Tote Bags und Plaetze vorab geplant werden. Gesammelt werden Name, Telefonnummer und WhatsApp ID.",
+    "signup.nameLabel": "Name",
+    "signup.phoneLabel": "Telefonnummer",
+    "signup.whatsappLabel": "WhatsApp ID",
+    "signup.note": "Die Daten werden nur fuer die Orga der Painting-Teilnahme genutzt.",
+    "signup.submit": "Painting Spot anfragen",
+    "signup.submitting": "Speichert gerade...",
+    "signup.statusIdle": "Google Apps Script verbinden, dann koennen Eintraege direkt im Sheet landen.",
+    "signup.statusConfigMissing":
+      "Die Google Apps Script Web-App-URL fehlt noch in config.js. Danach ist das Formular live.",
+    "signup.statusSuccess": "Danke. Dein Platzwunsch fuer die Paint Session wurde im Sheet eingetragen.",
+    "signup.statusError": "Speichern fehlgeschlagen. Bitte spaeter nochmal versuchen.",
+    "signup.statusInvalid": "Bitte Name, Telefonnummer und WhatsApp ID vollstaendig eintragen.",
   },
   en: {
     "meta.title": "Tshela's Birthday - Shisha & Paint Night",
@@ -171,11 +190,11 @@ const translations = {
     "hero.titleBottom": "Shisha & Paint Night",
     "hero.brandLead": "with",
     "hero.lede":
-      "A birthday night that also works as an art event, an Afro music night, and a lounge gathering. BREAK brings the painting concept, feinSTAUB brings the bar atmosphere, and after midnight the party keeps going.",
+      "A birthday night that also works as an art event, an Afro music night, and a lounge gathering. BREAK brings the painting concept, feinSTAUB brings the bar atmosphere, a warm 90s vibe keeps the room nostalgic, and after midnight the party keeps going.",
     "hero.tagOne": "Birthday Celebration",
     "hero.tagTwo": "BREAK Paint Concept",
     "hero.tagThree": "feinSTAUB Lounge",
-    "hero.tagFour": "Afrobeats / Afrohouse",
+    "hero.tagFour": "90s Vibe / Afrobeats / Afrohouse",
     "hero.calendarButton": "Add to calendar",
     "calendar.eyebrow": "Calendar",
     "calendar.title": "Which calendar do you want to add it to?",
@@ -223,7 +242,7 @@ const translations = {
       "The painting corner closes, but the party continues in the bar with music, drinks, and shisha.",
     "schedule.cardFourNote":
       "Drinks and shisha are ordered at the bar and paid individually by each guest.",
-    "schedule.quote": "Art Event x Afro Music Night x Birthday Celebration",
+    "schedule.quote": "Art Event x 90s Vibe x Afro Music Night x Birthday Celebration",
     "location.eyebrow": "feinSTAUB Lounge",
     "location.heading": "The lounge is not only the venue, it is part of the staging itself.",
     "location.blockLabel": "Location",
@@ -265,6 +284,22 @@ const translations = {
     "details.brandOne": "Tshela's Birthday",
     "details.brandTwo": "BREAK Paint Concept",
     "details.brandThree": "feinSTAUB Lounge",
+    "signup.eyebrow": "Painting Guest List",
+    "signup.heading": "Join the 90s paint table here if you want a spot.",
+    "signup.body":
+      "This helps plan materials, tote bags, and seats ahead of time. We collect name, phone number, and WhatsApp ID.",
+    "signup.nameLabel": "Name",
+    "signup.phoneLabel": "Phone Number",
+    "signup.whatsappLabel": "WhatsApp ID",
+    "signup.note": "The details are only used to organize painting participation.",
+    "signup.submit": "Request painting spot",
+    "signup.submitting": "Saving...",
+    "signup.statusIdle": "Connect Google Apps Script and entries can land in the sheet instantly.",
+    "signup.statusConfigMissing":
+      "The Google Apps Script web app URL is still missing in config.js. Once added, the form is live.",
+    "signup.statusSuccess": "Thanks. Your paint session request has been added to the sheet.",
+    "signup.statusError": "Saving failed. Please try again later.",
+    "signup.statusInvalid": "Please enter name, phone number, and WhatsApp ID.",
   },
 };
 
@@ -310,6 +345,11 @@ const practiceState = {
   width: 0,
   height: 0,
   touchIdentifier: null,
+};
+
+const signupState = {
+  submitting: false,
+  configured: false,
 };
 
 const tickerKeys = [
@@ -386,6 +426,9 @@ function applyTranslations(language) {
 
   updateProgressState(inkState.scrollRatio);
   updateFrameMetrics();
+  if (!signupState.submitting) {
+    setSignupSubmitting(false);
+  }
 
   try {
     window.localStorage.setItem("bloom-language", language);
@@ -443,6 +486,126 @@ function initCalendarLinks() {
     `&enddt=${encodeURIComponent(calendarEvent.endLocal)}` +
     `&body=${details}` +
     `&location=${location}`;
+}
+
+function getSignupConfig() {
+  const url = typeof appConfig.googleAppsScriptUrl === "string"
+    ? appConfig.googleAppsScriptUrl.trim().replace(/\/+$/, "")
+    : "";
+
+  return {
+    url,
+    isConfigured: Boolean(url),
+  };
+}
+
+function setSignupStatus(key, state = "neutral") {
+  if (!paintingSignupStatus) {
+    return;
+  }
+
+  paintingSignupStatus.dataset.i18n = key;
+  paintingSignupStatus.dataset.state = state;
+  paintingSignupStatus.textContent = getTranslation(localeState.current, key);
+}
+
+function setSignupSubmitting(isSubmitting) {
+  signupState.submitting = isSubmitting;
+
+  if (!paintingSignupSubmit) {
+    return;
+  }
+
+  paintingSignupSubmit.disabled = isSubmitting || !signupState.configured;
+  paintingSignupSubmit.textContent = getTranslation(
+    localeState.current,
+    isSubmitting ? "signup.submitting" : "signup.submit"
+  );
+}
+
+function syncSignupAvailability() {
+  if (!paintingSignupForm) {
+    return;
+  }
+
+  const config = getSignupConfig();
+  signupState.configured = config.isConfigured;
+
+  [...paintingSignupForm.elements].forEach((element) => {
+    if (!(element instanceof HTMLElement) || element.tagName === "BUTTON") {
+      return;
+    }
+
+    element.toggleAttribute("disabled", !config.isConfigured);
+  });
+
+  setSignupSubmitting(false);
+  setSignupStatus(
+    config.isConfigured ? "signup.statusIdle" : "signup.statusConfigMissing",
+    config.isConfigured ? "neutral" : "warning"
+  );
+}
+
+function getSignupPayload(form) {
+  const formData = new FormData(form);
+  const fullName = String(formData.get("full_name") || "").trim();
+  const phoneNumber = String(formData.get("phone_number") || "").trim();
+  const whatsappId = String(formData.get("whatsapp_id") || "").trim();
+
+  if (!fullName || !phoneNumber || !whatsappId) {
+    return null;
+  }
+
+  return {
+    full_name: fullName,
+    phone_number: phoneNumber,
+    whatsapp_id: whatsappId,
+    locale: localeState.current,
+  };
+}
+
+async function submitPaintingSignup(event) {
+  event.preventDefault();
+
+  if (!paintingSignupForm || signupState.submitting) {
+    return;
+  }
+
+  const config = getSignupConfig();
+  if (!config.isConfigured) {
+    syncSignupAvailability();
+    return;
+  }
+
+  const payload = getSignupPayload(paintingSignupForm);
+  if (!payload) {
+    setSignupStatus("signup.statusInvalid", "error");
+    return;
+  }
+
+  setSignupSubmitting(true);
+  setSignupStatus("signup.submitting", "neutral");
+
+  try {
+    const body = new URLSearchParams({
+      ...payload,
+      source: "bloom-birthday-invite",
+    });
+
+    await fetch(config.url, {
+      method: "POST",
+      mode: "no-cors",
+      body,
+    });
+
+    paintingSignupForm.reset();
+    setSignupStatus("signup.statusSuccess", "success");
+  } catch (error) {
+    console.error(error);
+    setSignupStatus("signup.statusError", "error");
+  } finally {
+    setSignupSubmitting(false);
+  }
 }
 
 function createTickerGroup(language, repetitions = 1) {
@@ -1305,6 +1468,8 @@ function attachGlobalEvents() {
     }
   });
 
+  paintingSignupForm?.addEventListener("submit", submitPaintingSignup);
+
   progressButton.addEventListener("click", () => {
     if (inkState.scrollRatio >= 0.985) {
       window.scrollTo({
@@ -1363,6 +1528,7 @@ function init() {
   initPracticeBoard();
   initCalendarLinks();
   initVenueMap();
+  syncSignupAvailability();
   updateTheme(panels[0]);
   resizeInkCanvas();
   createBlobs();

@@ -1249,6 +1249,130 @@ main {
   letter-spacing: 0.08em;
 }
 
+.signup-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(24, 22, 22, 0.08);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58)),
+    rgba(255, 248, 239, 0.82);
+  box-shadow: var(--shadow);
+  transform:
+    translate3d(0, var(--drift-y), 0)
+    rotate(var(--drift-r));
+  transition: transform 180ms linear;
+}
+
+.signup-card__intro,
+.signup-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.signup-card__intro h3 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3.2vw, 2.6rem);
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.signup-card__body,
+.signup-form__note,
+.signup-form__status {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 88%, black);
+  line-height: 1.6;
+}
+
+.signup-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.signup-field span {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.signup-field input {
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(24, 22, 22, 0.1);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease,
+    opacity 160ms ease;
+}
+
+.signup-field input:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-1) 52%, var(--ink));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-1) 18%, transparent);
+}
+
+.signup-field input:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.signup-form__actions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.signup-form__submit {
+  min-height: 3.2rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.2rem;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 72%, var(--ink)), color-mix(in srgb, var(--accent-2) 62%, var(--ink)));
+  color: #fffaf2;
+  cursor: pointer;
+  box-shadow: 0 16px 38px rgba(24, 22, 22, 0.12);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    opacity 160ms ease;
+}
+
+.signup-form__submit:hover,
+.signup-form__submit:focus-visible {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 22px 46px rgba(24, 22, 22, 0.14);
+}
+
+.signup-form__submit:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 10px 20px rgba(24, 22, 22, 0.08);
+}
+
+.signup-form__status[data-state="success"] {
+  color: #24613d;
+}
+
+.signup-form__status[data-state="error"] {
+  color: #a12f32;
+}
+
+.signup-form__status[data-state="warning"] {
+  color: #7f4d0e;
+}
+
 @keyframes ticker {
   from {
     transform: translateX(0);
@@ -1423,7 +1547,8 @@ main {
   }
 
   .hero__stack,
-  .poster-card__grid {
+  .poster-card__grid,
+  .signup-card {
     grid-template-columns: 1fr;
   }
 

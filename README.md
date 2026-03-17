@@ -20,6 +20,28 @@ npm run dev
 - BREAK 로고는 `assets/break-mark.svg`가 현재 플레이스홀더이며, 실제 로고 파일로 교체하면 된다.
 - Google Maps Embed API 키는 `config.js`의 `googleMapsEmbedApiKey`에 넣으면 된다.
 - 로고 경로를 바꾸고 싶으면 `config.js`의 `breakLogoPath`를 수정하면 된다.
+- 페인팅 참가 신청 폼은 `config.js`의 `googleAppsScriptUrl`을 채우면 활성화된다.
+
+## Google Apps Script Setup
+
+1. 새 Google Spreadsheet를 만들고 원하는 시트 이름을 정한다. 기본 예시는 `Painting Signups`다.
+2. `Extensions > Apps Script`로 들어간다.
+3. [`apps-script/Code.gs`](/Users/raina/bloom-birthday-invite/apps-script/Code.gs)를 붙여 넣고 `SPREADSHEET_ID`와 `SHEET_NAME`을 수정한다.
+4. `Deploy > New deployment > Web app`으로 배포한다.
+5. `Execute as: Me`, `Who has access: Anyone` 또는 `Anyone with the link`로 설정한다.
+6. 배포된 Web App URL을 [`config.js`](/Users/raina/bloom-birthday-invite/config.js)에 넣는다.
+
+```js
+window.EVENT_CONFIG = {
+  googleMapsEmbedApiKey: "",
+  breakLogoPath: "./assets/break-logo-transparent.png",
+  googleAppsScriptUrl: "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec",
+};
+```
+
+- 현재 폼은 `timestamp`, `full_name`, `phone_number`, `whatsapp_id`, `locale`, `source`를 시트에 저장한다.
+- 프론트엔드는 `POST + no-cors + form-urlencoded`로 전송하고, 실제 정리는 Google Sheets에서 한다.
+- Apps Script를 수정하면 전화번호 포맷 정리나 중복 체크도 나중에 쉽게 붙일 수 있다.
 
 ## Notes
 

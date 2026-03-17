@@ -117,14 +117,15 @@
               <p class="hero__lede" data-i18n="hero.lede">
                 Eine Geburtstagsnacht, die gleichzeitig Kunstabend, Afro-Music-Night
                 und Lounge-Treffen ist. BREAK bringt das Painting-Konzept, feinSTAUB
-                die Bar-Atmosphaere, und nach Mitternacht geht die Party weiter.
+                die Bar-Atmosphaere, dazu kommt ein warmer 90s-Vibe mit throwback
+                energy, und nach Mitternacht geht die Party weiter.
               </p>
 
               <div class="hero__tags">
                 <span data-i18n="hero.tagOne">Birthday Celebration</span>
                 <span data-i18n="hero.tagTwo">BREAK Paint Concept</span>
                 <span data-i18n="hero.tagThree">feinSTAUB Lounge</span>
-                <span data-i18n="hero.tagFour">Afrobeats / Afrohouse</span>
+                <span data-i18n="hero.tagFour">90s Vibe / Afrobeats / Afrohouse</span>
               </div>
             </div>
 
@@ -256,7 +257,7 @@
 
           <div class="quote-strip drift" data-parallax="0.2">
             <span data-i18n="schedule.quote">
-              Art Event x Afro Music Night x Birthday Celebration
+              Art Event x 90s Vibe x Afro Music Night x Birthday Celebration
             </span>
           </div>
         </div>
@@ -526,6 +527,75 @@
               </article>
             </div>
           </div>
+
+          <section class="signup-card drift" data-parallax="-0.12" aria-labelledby="paintingSignupHeading">
+            <div class="signup-card__intro">
+              <p class="eyebrow" data-i18n="signup.eyebrow">Painting Guest List</p>
+              <h3 id="paintingSignupHeading" data-i18n="signup.heading">
+                Wer beim 90s Paint Table dabei sein will, traegt sich hier ein.
+              </h3>
+              <p class="signup-card__body" data-i18n="signup.body">
+                So koennen Material, Tote Bags und Plaetze vorab geplant werden. Gesammelt
+                werden Name, Telefonnummer und WhatsApp ID.
+              </p>
+            </div>
+
+            <form class="signup-form" id="paintingSignupForm" novalidate>
+              <label class="signup-field">
+                <span data-i18n="signup.nameLabel">Name</span>
+                <input
+                  id="signupName"
+                  name="full_name"
+                  type="text"
+                  autocomplete="name"
+                  maxlength="80"
+                  required
+                />
+              </label>
+
+              <label class="signup-field">
+                <span data-i18n="signup.phoneLabel">Telefonnummer</span>
+                <input
+                  id="signupPhone"
+                  name="phone_number"
+                  type="tel"
+                  autocomplete="tel"
+                  maxlength="40"
+                  required
+                />
+              </label>
+
+              <label class="signup-field">
+                <span data-i18n="signup.whatsappLabel">WhatsApp ID</span>
+                <input
+                  id="signupWhatsapp"
+                  name="whatsapp_id"
+                  type="text"
+                  autocomplete="username"
+                  maxlength="80"
+                  required
+                />
+              </label>
+
+              <p class="signup-form__note" data-i18n="signup.note">
+                Die Daten werden nur fuer die Orga der Painting-Teilnahme genutzt.
+              </p>
+
+              <div class="signup-form__actions">
+                <button class="signup-form__submit" id="paintingSignupSubmit" type="submit" data-i18n="signup.submit">
+                  Painting Spot anfragen
+                </button>
+                <p
+                  class="signup-form__status"
+                  id="paintingSignupStatus"
+                  aria-live="polite"
+                  data-i18n="signup.statusIdle"
+                >
+                  Google Apps Script verbinden, dann koennen Eintraege direkt im Sheet landen.
+                </p>
+              </div>
+            </form>
+          </section>
         </div>
       </section>
     </main>
