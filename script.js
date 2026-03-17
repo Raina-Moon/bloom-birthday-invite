@@ -166,7 +166,7 @@ const translations = {
     "signup.note": "Die Daten werden nur fuer die Orga der Painting-Teilnahme genutzt.",
     "signup.submit": "Painting Spot anfragen",
     "signup.submitting": "Speichert gerade...",
-    "signup.statusIdle": "Google Apps Script verbinden, dann koennen Eintraege direkt im Sheet landen.",
+    "signup.statusIdle": "",
     "signup.statusConfigMissing":
       "Die Google Apps Script Web-App-URL fehlt noch in config.js. Danach ist das Formular live.",
     "signup.statusSuccess": "Danke. Dein Platzwunsch fuer die Paint Session wurde im Sheet eingetragen.",
@@ -296,7 +296,7 @@ const translations = {
     "signup.note": "The details are only used to organize painting participation.",
     "signup.submit": "Request painting spot",
     "signup.submitting": "Saving...",
-    "signup.statusIdle": "Connect Google Apps Script and entries can land in the sheet instantly.",
+    "signup.statusIdle": "",
     "signup.statusConfigMissing":
       "The Google Apps Script web app URL is still missing in config.js. Once added, the form is live.",
     "signup.statusSuccess": "Thanks. Your paint session request has been added to the sheet.",
